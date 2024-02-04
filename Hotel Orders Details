@@ -1,0 +1,96 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+
+//FoodDetails.cs
+
+
+
+
+    public class FoodDetails
+    {
+        public string FoodType { get; set; }
+        public int Quantity { get; set; }
+        public int PricePerPiece { get; set; }
+        public double TotalPrice { get; set; }
+        public double Discount { get; set; }
+    }
+
+public class Program
+{ 
+public static void Main(string[] args)
+    {
+        Console.WriteLine("Enter the food type");
+        string foodType = Console.ReadLine();
+        Console.WriteLine("Enter the quantity");
+        int quantity = Convert.ToInt32(Console.ReadLine());
+        Console.WriteLine("Enter the price per piece");
+        int pricePerPiece = Convert.ToInt32(Console.ReadLine());
+        Billing billing = new Billing()
+        {
+            FoodType = foodType, 
+            Quantity = quantity, 
+            PricePerPiece = pricePerPiece
+        };
+        if (billing.ValidateFoodType(billing.FoodType))
+        {
+            FoodDetails billDetails=billing.GenerateBill();
+            Console.WriteLine("FoodType");
+            Console.WriteLine("Quantity");
+            Console.WriteLine("PricePerPiece");
+            Console.WriteLine("TotalPrice");
+            Console.WriteLine("Discount");
+            Console.WriteLine(billDetails.FoodType);
+            Console.WriteLine(billDetails.Quantity);
+            Console.WriteLine(billDetails.PricePerPiece);
+            Console.WriteLine(billDetails.TotalPrice);
+            Console.WriteLine(billDetails.Discount);
+        }
+    }
+}
+
+
+
+
+
+
+
+public class Billing: FoodDetails
+{
+    public bool ValidateFoodType(string foodType)
+    {
+        if (foodType == "Samosa" || foodType == "Spring Roll" || foodType == "Empanada") 
+        {
+        return true;
+        }else
+        {
+        Console.WriteLine("Invalid food type");
+        return false;
+        }
+    }
+    public FoodDetails GenerateBill()
+    {
+        TotalPrice = Quantity * PricePerPiece;
+        if (TotalPrice >= 100 && TotalPrice <= 500)
+            Discount = TotalPrice * 0.10;
+        else if (TotalPrice > 500 && TotalPrice <= 1000)
+            Discount = TotalPrice* 0.15;
+        else if (TotalPrice > 1000) 
+            Discount = TotalPrice * 0.20;
+        else
+            Discount = 0;
+        FoodDetails foodDetails = new FoodDetails()
+        {
+            FoodType = FoodType,
+            Quantity = Quantity,
+            PricePerPiece = PricePerPiece,
+            TotalPrice = TotalPrice,
+            Discount = Discount
+        };
+        return foodDetails;
+    }
+
+}
