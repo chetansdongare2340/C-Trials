@@ -1,0 +1,112 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+
+    public class Program
+    {
+        public static void Main()
+        {
+            Program pr = new Program();
+            while (true)
+            {
+                Console.WriteLine("1. Find mobile Details");
+                Console.WriteLine("2. Minimum and Maximum sold");
+                Console.WriteLine("3. Sort mobiles by count");
+                Console.WriteLine("4. Exit");
+                Console.WriteLine("Enter your choice");
+                int choice = int.Parse(Console.ReadLine());
+                switch (choice)
+                {
+                    case 1:
+                        Console.WriteLine("Enter the sold count");
+                        int sc = int.Parse(Console.ReadLine());
+                        SortedDictionary<string, long> k = pr.FindMobileDetails(sc);
+                        foreach (var item in k)
+                        {
+                            Console.WriteLine(item.Key + " " + item.Value);
+                        }
+                        break;
+
+                    case 2:
+                        List<string> minandmax = pr.FindMinandMaxSoldMobiles();
+                        Console.WriteLine("Minimum Sold Mobile is : " + minandmax[0]);
+                        Console.WriteLine("Maximum Sold Mobile is : " + minandmax[1]);
+                        break;
+
+                    case 3:
+                        Dictionary<string, long> sor = pr.SortByCount();
+                        foreach (var item in sor)
+                        {
+                            Console.WriteLine(item.Key + " " + item.Value);
+                        }
+                        break;
+
+                    case 4:
+                        Console.WriteLine("Thank you"); return;
+                }
+            }
+        }
+        public static SortedDictionary<string, long> mobileDetails = new SortedDictionary<string, long>()
+{
+{"Nokia",55},
+{"Samsung",250},
+{"Sony",510},
+{"Oneplus",790},
+{"Redmi",800}
+
+};
+
+        public SortedDictionary<string, long> FindMobileDetails(long soldCount)
+        {
+            SortedDictionary<string, long> sd = new SortedDictionary<string, long>(); foreach (var item in mobileDetails)
+            {
+                if (item.Value == soldCount)
+                {
+                    sd.Add(item.Key, item.Value);
+                }
+            }
+            return sd;
+        }
+        public List<string> FindMinandMaxSoldMobiles()
+        {
+            List<string> name = new List<string>();
+            long res = long.MaxValue;
+            long res1 = long.MinValue;
+            foreach (var item in mobileDetails)
+            {
+                res = Math.Min(item.Value, res);
+                res1 = Math.Max(item.Value, res1);
+            }
+            foreach (var item in mobileDetails)
+            {
+                if (res == item.Value)
+                {
+                    name.Add(item.Key);
+                }
+
+
+            }
+            foreach (var item in mobileDetails)
+
+            {
+
+                if (res1 == item.Value)
+                {
+                    name.Add(item.Key);
+                }
+
+
+            }
+            return name;
+
+        }
+        public Dictionary<string, long> SortByCount()
+        {
+            return mobileDetails.OrderBy(c => c.Value).ToDictionary(a => a.Key, a => a.Value);
+        }
+
+    }
+
