@@ -1,0 +1,84 @@
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        Console.WriteLine("Enter the bike number");
+        string bikeNumber = Console.ReadLine();
+        BikeUtility bikeUtility = new BikeUtility();
+
+        if (bikeUtility.ValidateBikeNumber(bikeNumber))
+        {
+            Console.WriteLine("Enter the engine capacity");
+            int engineCapacity = int.Parse(Console.ReadLine());
+
+            Console.WriteLine("Enter the year");
+            int year = int.Parse(Console.ReadLine());
+
+            Console.WriteLine("Enter the cost of the bike");
+            double cost = double.Parse(Console.ReadLine());
+
+            Bike bike = bikeUtility.CalculateInsurance(bikeNumber, engineCapacity, year, cost);
+
+            Console.WriteLine("BikeNumber\tEngineCapacity\tYear\tCost\tInsurance");
+            Console.WriteLine($"{bike.BikeNumber}\t\t{bike.EngineCapacity}\t\t{bike.Year}\t{bike.Cost}\t{bike.Insurance}");
+        }
+        else
+        {
+            Console.WriteLine("Invalid bike number");
+        }
+    }
+}
+
+public class Bike
+{
+    public string BikeNumber { get; set; }
+    public int EngineCapacity { get; set; }
+    public int Year { get; set; }
+    public double Cost { get; set; }
+    public double Insurance { get; set; }
+}
+
+public class BikeUtility : Bike
+{
+    public bool ValidateBikeNumber(string bikeNumber)
+    {
+        if (bikeNumber.Length == 5 &&
+            char.IsLetter(bikeNumber[0]) &&
+            char.IsLetter(bikeNumber[1]) &&
+            char.IsDigit(bikeNumber[2]) &&
+            char.IsDigit(bikeNumber[3]) &&
+            char.IsDigit(bikeNumber[4]))
+        {
+            return true;
+        }
+        else
+        {
+            //Console.WriteLine("Invalid bike number");
+            return false;
+        }
+    }
+
+    public Bike CalculateInsurance(string bikeNumber, int engineCapacity, int year, double cost)
+    {
+        Bike bike = new Bike
+        {
+            BikeNumber = bikeNumber,
+            EngineCapacity = engineCapacity,
+            Year = year,
+            Cost = cost
+        };
+
+        if (engineCapacity <= 200)
+        {
+            bike.Insurance = year <= 2000 ? 0.01 * cost : 0.02 * cost;
+        }
+        else
+        {
+            bike.Insurance = year <= 2000 ? 0.03 * cost : 0.04 * cost;
+        }
+
+        return bike;
+    }
+}
