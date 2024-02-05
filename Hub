@@ -1,0 +1,53 @@
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Retire_Hub
+{
+    public class Service:Club // DO NOT change the class name
+    {
+        // Implement your code here
+        public bool ValidateMemberId()
+        {
+            if (MemberId.StartsWith("Gold") && MemberId.Length == 8)
+            {
+                for (int i = 4; i < 8; i++)
+                {
+                    if (!Char.IsDigit(MemberId[i]))
+                        return false;
+                }
+                return true;
+            }
+            else if (MemberId.StartsWith("Premium") && MemberId.Length == 11)
+            {
+                for (int i = 7; i < 11; i++)
+                {
+                    if (!Char.IsDigit(MemberId[i]))
+                        return false;
+                }
+                return true;
+            }
+            return false;
+        }
+
+        public double CalculateMembershipFees()
+        {
+            if (MemberType == "Gold")
+                return 50000;
+            else if (MemberType == "Premium")
+                return 75000;
+            else
+                return 0;
+        }
+    }
+
+    public class Club // DO NOT change the class name
+    {
+        // Implement your code here
+        public string MemberId { get; set; }
+        public string MemberName { get; set; }
+        public string MemberType { get; set; }
+    }
