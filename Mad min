@@ -1,0 +1,190 @@
+using System;
+
+using System.Collections.Generic;
+
+using System.Linq;
+
+using System.Collections;
+
+public class Program
+
+{
+
+ public static Dictionary<string,float> empDictionary=new Dictionary<string,float>();
+
+ public static void Main(string[] args)
+
+ {
+
+ empDictionary.Add("EMP101",2.5f);
+
+ empDictionary.Add("EMP102",4.3f);
+
+ empDictionary.Add("EMP103",5.0f);
+
+ empDictionary.Add("EMP104",3.4f);
+
+ empDictionary.Add("EMP105",6.0f);
+Program pr=new Program();
+
+ while(true)
+
+ {
+
+ Console.WriteLine("Enter your choice");
+
+ Console.WriteLine("1. Find Employee Rating\n2. Find Employee With Highest Rating\n3. Sort 
+
+Employees By Rating\n4. Exit");
+
+ int choice=int.Parse(Console.ReadLine());
+
+ switch(choice)
+
+ {
+
+ case 1:
+
+ Console.WriteLine("Enter the employee id");
+
+ string k=Console.ReadLine();
+
+ float res=pr.FindEmployeeRating(k);
+
+ if(res==-1)
+
+ {
+
+ Console.WriteLine("Invalid employee id");
+
+ }
+
+ else
+
+ {
+
+ Console.WriteLine("Rating is : "+res);
+
+ }
+
+ break;
+
+ case 2:
+
+ Console.WriteLine("Enter the Rating");
+
+ float rating=float.Parse(Console.ReadLine());
+
+ List<string> list=pr.FindEmployeeWithHighestRating(rating);
+
+ if(list.Count>0)
+
+ {
+
+ foreach(string item in list)
+
+ {
+
+ Console.WriteLine(item);
+}
+
+ }
+
+ else
+
+ {
+
+ Console.WriteLine("No highest rating employees found");
+
+ }
+
+ break;
+
+ case 3:
+
+ Dictionary<string,float> mydict=pr.SortByRating();
+
+ Console.WriteLine("EmployeeId\tRating");
+
+ foreach(var item in mydict)
+
+ {
+
+ Console.WriteLine($"{item.Key}\t\t{item.Value}");
+
+ }
+
+ break;
+
+ case 4:
+
+ Console.WriteLine("Thank you");
+
+ return;
+
+ }
+
+ 
+
+ }
+
+ 
+
+ }
+
+ public float FindEmployeeRating(string empid)
+
+ {
+
+ float res1=-1;
+
+ foreach(var item in empDictionary)
+
+ {
+
+ if(item.Key==empid)
+
+ {
+
+ res1=item.Value;
+}
+
+ }
+
+ return res1;
+
+ }
+
+ public List<string> FindEmployeeWithHighestRating(float rating)
+
+ {
+
+ List<string> k=new List<string>();
+
+ foreach(var item in empDictionary)
+
+ {
+
+ if(rating==item.Value)
+
+ {
+
+ k.Add(item.Key);
+
+ }
+
+ }
+
+ return k;
+
+ }
+
+ public Dictionary<string,float> SortByRating()
+
+ {
+
+ return empDictionary.OrderByDescending(c=>c.Value).ToDictionary(a=>a.Key,a=>a.Value);
+
+ }
+
+}
