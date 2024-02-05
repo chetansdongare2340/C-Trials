@@ -11,11 +11,11 @@ public class Program //DO NOT change the class name
 {
 public static void Main(string[] args) //DO NOT change the 'Main' method signature
 {
-Console. WriteLine("Enter member id");
+Console.WriteLine("Enter member id");
 string MemberId=Console.ReadLine();
-Console. WriteLine ("Enter member name");
+Console.WriteLine ("Enter member name");
 string MemberName=Console. ReadLine();
-Console WriteLine("Enter member type");
+Console.WriteLine("Enter member type");
 string MemberType=Console.ReadLine();
 Service s=new Service();
 bool res=s.ValidateMemberId();
