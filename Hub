@@ -11,22 +11,25 @@ public class Program //DO NOT change the class name
 {
 public static void Main(string[] args) //DO NOT change the 'Main' method signature
 {
-Console. WriteLine("Enter member id"); string MemberId=Console.ReadLine();
-Console. WriteLine ("Enter member name"); string MemberName=Console. ReadLine();
-Console WriteLine("Enter member type"); string MemberType=Console.ReadLine);
-Service s=new Service);
+Console. WriteLine("Enter member id");
+string MemberId=Console.ReadLine();
+Console. WriteLine ("Enter member name");
+string MemberName=Console. ReadLine();
+Console WriteLine("Enter member type");
+string MemberType=Console.ReadLine();
+Service s=new Service();
 bool res=s.ValidateMemberId();
 if(res)
 {
 double amount=s.CalculateMembershipFees ();
-Console. WriteLine "Membership Fees is" +amount);
+Console. WriteLine( "Membership Fees is" +amount);
 ｝
 else
 {
 Console WriteLine("Invalid member id");
 ｝
 }
-
+}
     public class Service:Club // DO NOT change the class name
     {
         // Implement your code here
