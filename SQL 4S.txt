@@ -19,7 +19,18 @@ where month(return_date)=5
 group by car_name
 order by No_of_Days desc
 limit 1;
+**************************************************************
+UnOrdered Cakes
 
+select ca.cake_id, ca.cake_name, ca.cake_type
+from cakes ca left join Order_details od
+on ca.cake_id= od.cake_id
+where od.order_id is null
+and ca.cake_flavour='Chocolate' or ca.cake_flavour='pineapple'
+order by ca.cake_name desc;
+
+
+**************************************************************
 
 ****************************************************************
 Contact Information
@@ -45,4 +56,9 @@ FROM customers c
 WHERE c.email_id LIKE '%gmail%'
 ORDER BY c.customer_id DESC;
 
+*******************************************8
+Recent Subscription
 
+select customer_name from customer where phone_number=(select phone_number from subscription where 
+recharge_date=(select max(recharge_date) from subscription))
+order by customer_name desc;
