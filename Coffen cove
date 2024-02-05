@@ -1,0 +1,70 @@
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main()
+    {
+        Console.WriteLine("Welcome to Caffeine Cove!");
+
+        Dictionary<string, double> menu = new Dictionary<string, double>
+        {
+            { "Espresso", 2.50 },
+            { "Latte", 3.00 },
+            { "Cappuccino", 3.50 },
+            { "Americano", 2.00 },
+        };
+
+        List<string> order = new List<string>();
+
+        while (true)
+        {
+            Console.WriteLine("\nMenu:");
+            foreach (var item in menu)
+            {
+                Console.WriteLine($"{item.Key}: ${item.Value}");
+            }
+
+            Console.WriteLine("\nCurrent Order:");
+            foreach (var item in order)
+            {
+                Console.WriteLine(item);
+            }
+
+            Console.Write("\nEnter the name of the drink you'd like to order (or type 'done' to finish): ");
+            string userInput = Console.ReadLine();
+
+            if (userInput.ToLower() == "done")
+            {
+                break;
+            }
+
+            if (menu.ContainsKey(userInput))
+            {
+                order.Add(userInput);
+                Console.WriteLine($"{userInput} added to your order!");
+            }
+            else
+            {
+                Console.WriteLine("Invalid choice. Please select a drink from the menu.");
+            }
+        }
+
+        double totalCost = CalculateTotalCost(order, menu);
+        Console.WriteLine($"\nTotal Cost: ${totalCost}");
+        Console.WriteLine("Thank you for ordering at Caffeine Cove. Enjoy your drinks!");
+
+    }
+
+    static double CalculateTotalCost(List<string> order, Dictionary<string, double> menu)
+    {
+        double totalCost = 0;
+
+        foreach (var item in order)
+        {
+            totalCost += menu[item];
+        }
+
+        return totalCost;
+    }
+}
